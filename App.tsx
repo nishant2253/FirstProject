@@ -4,14 +4,19 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {Provider as PaperProvider, DefaultTheme} from 'react-native-paper';
 import HomeScreen from './src/screens/HomeScreen';
 import ChatbotScreen from './src/screens/ChatbotScreen';
-import BreadStockScreen, {UserInput} from './src/screens/BreadStockScreen'; // Corrected import
+import BreadStockScreen, {UserInput} from './src/screens/BreadStockScreen';
 import ChatbotResponseScreen from './src/screens/ChatbotResponseScreen';
+import GroceryCompareScreen from './src/screens/GroceryCompareScreen';
+import GroceryCompareResultScreen from './src/screens/GroceryCompareResultScreen';
 
 export type RootStackParamList = {
   Home: undefined;
+  StockAssistant: undefined;
   BreadStock: undefined;
   Chatbot: {userInput: UserInput};
   ChatbotResponse: {response: string};
+  GroceryCompare: undefined;
+  GroceryCompareResult: {item: string; type: string};
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -42,22 +47,37 @@ const App: React.FC = () => {
           <Stack.Screen
             name="Home"
             component={HomeScreen}
-            options={{title: 'Walmart Food Stock'}}
+            options={{title: 'Walmart Assistant'}}
+          />
+          <Stack.Screen
+            name="StockAssistant"
+            component={BreadStockScreen}
+            options={{title: 'Stock Assistant'}}
           />
           <Stack.Screen
             name="BreadStock"
-            component={BreadStockScreen} // Added BreadStock screen
+            component={BreadStockScreen}
             options={{title: 'Bread Stock'}}
           />
           <Stack.Screen
             name="Chatbot"
             component={ChatbotScreen}
-            options={{title: 'Bread Stock Assistant'}}
+            options={{title: 'Stock Assistant'}}
           />
           <Stack.Screen
             name="ChatbotResponse"
             component={ChatbotResponseScreen}
             options={{title: 'Assistant Response'}}
+          />
+          <Stack.Screen
+            name="GroceryCompare"
+            component={GroceryCompareScreen}
+            options={{title: 'Grocery Compare'}}
+          />
+          <Stack.Screen
+            name="GroceryCompareResult"
+            component={GroceryCompareResultScreen}
+            options={{title: 'Compare Results'}}
           />
         </Stack.Navigator>
       </NavigationContainer>

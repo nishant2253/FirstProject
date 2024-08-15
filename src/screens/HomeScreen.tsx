@@ -15,13 +15,23 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
   return (
     <Surface style={styles.container}>
       <FoodIcon
+        name="Stock Assistant"
+        icon="store"
+        onPress={() => navigation.navigate('StockAssistant')}
+      />
+      <FoodIcon
+        name="Grocery Compare"
+        icon="compare"
+        onPress={() => navigation.navigate('GroceryCompare')}
+      />
+      {/* <FoodIcon
         name="Bread"
         icon="bread-slice"
         onPress={() => navigation.navigate('BreadStock')}
       />
       <FoodIcon name="Pulses" icon="food-variant" onPress={() => {}} />
       <FoodIcon name="Oil" icon="oil" onPress={() => {}} />
-      <FoodIcon name="Wheat" icon="grain" onPress={() => {}} />
+      <FoodIcon name="Wheat" icon="grain" onPress={() => {}} /> */}
     </Surface>
   );
 };
