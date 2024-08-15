@@ -8,6 +8,8 @@ import BreadStockScreen, {UserInput} from './src/screens/BreadStockScreen';
 import ChatbotResponseScreen from './src/screens/ChatbotResponseScreen';
 import GroceryCompareScreen from './src/screens/GroceryCompareScreen';
 import GroceryCompareResultScreen from './src/screens/GroceryCompareResultScreen';
+import GroceryNavigatorScreen from './src/screens/GroceryNavigatorScreen';
+import GroceryLocationScreen from './src/screens/GroceryLocationScreen';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -17,6 +19,8 @@ export type RootStackParamList = {
   ChatbotResponse: {response: string};
   GroceryCompare: undefined;
   GroceryCompareResult: {item: string; type: string};
+  GroceryNavigator: undefined;
+  GroceryLocation: {item: string; brand: string};
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -49,6 +53,7 @@ const App: React.FC = () => {
             component={HomeScreen}
             options={{title: 'Walmart Assistant'}}
           />
+          {/* ... (other existing screens) ... */}
           <Stack.Screen
             name="StockAssistant"
             component={BreadStockScreen}
@@ -78,6 +83,16 @@ const App: React.FC = () => {
             name="GroceryCompareResult"
             component={GroceryCompareResultScreen}
             options={{title: 'Compare Results'}}
+          />
+          <Stack.Screen
+            name="GroceryNavigator"
+            component={GroceryNavigatorScreen}
+            options={{title: 'Grocery Navigator'}}
+          />
+          <Stack.Screen
+            name="GroceryLocation"
+            component={GroceryLocationScreen}
+            options={{title: 'Item Location'}}
           />
         </Stack.Navigator>
       </NavigationContainer>

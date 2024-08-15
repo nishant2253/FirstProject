@@ -24,14 +24,11 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
         icon="compare"
         onPress={() => navigation.navigate('GroceryCompare')}
       />
-      {/* <FoodIcon
-        name="Bread"
-        icon="bread-slice"
-        onPress={() => navigation.navigate('BreadStock')}
+      <FoodIcon
+        name="Grocery Navigator"
+        icon="map-marker"
+        onPress={() => navigation.navigate('GroceryNavigator')}
       />
-      <FoodIcon name="Pulses" icon="food-variant" onPress={() => {}} />
-      <FoodIcon name="Oil" icon="oil" onPress={() => {}} />
-      <FoodIcon name="Wheat" icon="grain" onPress={() => {}} /> */}
     </Surface>
   );
 };
