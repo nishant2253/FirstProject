@@ -1,27 +1,41 @@
 // src/screens/ChatbotScreen.tsx
 import React, {useState} from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
-import {TextInput, Button, Card, Title, Paragraph} from 'react-native-paper';
+import {TextInput, Button, Card, Title} from 'react-native-paper';
 import {getBreadRecommendation} from '../api/huggingFaceApi';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../../App';
+import {RouteProp} from '@react-navigation/native';
 
-const ChatbotScreen: React.FC = () => {
-  const [slicesPerDay, setSlicesPerDay] = useState<string>('');
-  const [daysOfStock, setDaysOfStock] = useState<string>('');
-  const [averagePrice, setAveragePrice] = useState<string>('');
-  const [response, setResponse] = useState<string>('');
+type ChatbotScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Chatbot'
+>;
+
+type ChatbotScreenRouteProp = RouteProp<RootStackParamList, 'Chatbot'>;
+
+type Props = {
+  navigation: ChatbotScreenNavigationProp;
+  route: ChatbotScreenRouteProp;
+};
+
+const ChatbotScreen: React.FC<Props> = ({navigation, route}) => {
+  const {slicesPerDay, daysToConsume, avgPrice} = route.params.userInput;
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async () => {
     setLoading(true);
     try {
       const result = await getBreadRecommendation(
-        parseInt(slicesPerDay, 10),
-        parseInt(daysOfStock, 10),
-        parseFloat(averagePrice),
+        slicesPerDay,
+        daysToConsume,
+        avgPrice,
       );
-      setResponse(result);
+      navigation.navigate('ChatbotResponse', {response: result});
     } catch (error) {
-      setResponse('An error occurred while processing your request.');
+      navigation.navigate('ChatbotResponse', {
+        response: 'An error occurred while processing your request.',
+      });
     }
     setLoading(false);
   };
@@ -30,26 +44,23 @@ const ChatbotScreen: React.FC = () => {
     <ScrollView style={styles.container}>
       <Card style={styles.card}>
         <Card.Content>
-          <Title>Bread Stock Calculator</Title>
+          <Title>Confirm Your Input</Title>
           <TextInput
             label="Daily bread slices"
-            value={slicesPerDay}
-            onChangeText={setSlicesPerDay}
-            keyboardType="numeric"
+            value={slicesPerDay.toString()}
+            disabled
             style={styles.input}
           />
           <TextInput
             label="Days to stock"
-            value={daysOfStock}
-            onChangeText={setDaysOfStock}
-            keyboardType="numeric"
+            value={daysToConsume.toString()}
+            disabled
             style={styles.input}
           />
           <TextInput
             label="Average price ($)"
-            value={averagePrice}
-            onChangeText={setAveragePrice}
-            keyboardType="numeric"
+            value={avgPrice.toString()}
+            disabled
             style={styles.input}
           />
           <Button
@@ -61,14 +72,6 @@ const ChatbotScreen: React.FC = () => {
           </Button>
         </Card.Content>
       </Card>
-      {response && (
-        <Card style={styles.responseCard}>
-          <Card.Content>
-            <Title>Recommendation</Title>
-            <Paragraph>{response}</Paragraph>
-          </Card.Content>
-        </Card>
-      )}
     </ScrollView>
   );
 };

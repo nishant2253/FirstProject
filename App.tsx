@@ -1,16 +1,17 @@
-// App.tsx
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Provider as PaperProvider, DefaultTheme} from 'react-native-paper';
 import HomeScreen from './src/screens/HomeScreen';
 import ChatbotScreen from './src/screens/ChatbotScreen';
-import {UserInput} from './src/screens/BreadStockScreen';
+import BreadStockScreen, {UserInput} from './src/screens/BreadStockScreen'; // Corrected import
+import ChatbotResponseScreen from './src/screens/ChatbotResponseScreen';
 
 export type RootStackParamList = {
+  Home: undefined;
   BreadStock: undefined;
   Chatbot: {userInput: UserInput};
-  Home: undefined;
+  ChatbotResponse: {response: string};
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -44,9 +45,19 @@ const App: React.FC = () => {
             options={{title: 'Walmart Food Stock'}}
           />
           <Stack.Screen
+            name="BreadStock"
+            component={BreadStockScreen} // Added BreadStock screen
+            options={{title: 'Bread Stock'}}
+          />
+          <Stack.Screen
             name="Chatbot"
             component={ChatbotScreen}
             options={{title: 'Bread Stock Assistant'}}
+          />
+          <Stack.Screen
+            name="ChatbotResponse"
+            component={ChatbotResponseScreen}
+            options={{title: 'Assistant Response'}}
           />
         </Stack.Navigator>
       </NavigationContainer>
