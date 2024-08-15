@@ -1,4 +1,3 @@
-// src/screens/HomeScreen.tsx
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -18,7 +17,7 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
       <FoodIcon
         name="Bread"
         icon="bread-slice"
-        onPress={() => navigation.navigate('Chatbot')}
+        onPress={() => navigation.navigate('BreadStock')}
       />
       <FoodIcon name="Pulses" icon="food-variant" onPress={() => {}} />
       <FoodIcon name="Oil" icon="oil" onPress={() => {}} />

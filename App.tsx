@@ -5,10 +5,12 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {Provider as PaperProvider, DefaultTheme} from 'react-native-paper';
 import HomeScreen from './src/screens/HomeScreen';
 import ChatbotScreen from './src/screens/ChatbotScreen';
+import {UserInput} from './src/screens/BreadStockScreen';
 
 export type RootStackParamList = {
+  BreadStock: undefined;
+  Chatbot: {userInput: UserInput};
   Home: undefined;
-  Chatbot: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
